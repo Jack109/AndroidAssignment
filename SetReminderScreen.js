@@ -40,18 +40,11 @@ export class SetReminderScreen extends Component {
             minute: null,
             timeText: '',
         }
-        this.state = {
-            newValue: '',
-            width: 40
-        }
+     
     }
 
 
-    updateSize = (width) => {
-        this.setState({
-            width
-        });
-    }
+
     openDatePicker = async () => {
         try {
             const { action, year, month, day } = await DatePickerAndroid.open({
@@ -78,7 +71,7 @@ export class SetReminderScreen extends Component {
             const { action, hour, minute } = await TimePickerAndroid.open({
                 hour: this.state.hour,
                 minute: this.state.minute,
-                is24Hour: true,
+                is24Hour: false,
                 mode: 'clock',  // try also with `spinner`
             });
             if (action !== TimePickerAndroid.dismissedAction) {
@@ -86,7 +79,7 @@ export class SetReminderScreen extends Component {
                 this.setState({
                     hour: hour,
                     minute: minute,
-                    timeText: `${hour > 9 ? hour : '0' + hour}:${minute > 9 ? minute : '0' + minute}`,
+                    timeText: `${hour > 12 ? hour-12: hour}:${minute > 9 ? minute : '0' + minute} ${hour>=12?"PM":"AM"}`,
                 });
             }
         } catch ({ code, message }) {
@@ -95,11 +88,6 @@ export class SetReminderScreen extends Component {
     }
 
     render() {
-        const { newValue, width } = this.state;
-
-        let newStyle = {
-            width
-        }
         return (
             <View style={styles.overall}>
                 <Text style={styles.headline}> Add Reminder</Text>
@@ -109,9 +97,6 @@ export class SetReminderScreen extends Component {
                     >
                         <View>
                             <TextInput
-                                editable={true}
-                                multiline={true}
-                                onContentSizeChange={(e) => this.updateSize(e.nativeEvent.contentSize.width)}
                                 style={styles.input}
                                 value={this.state.dateText}
                                 placeholder='Event Date'
@@ -171,9 +156,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     input: {
+        textAlignVertical:'bottom',
         textAlign: 'center',
         fontSize: 20,
-        width: 300,
+        width: 245,
         height: 100,
         color: 'black',
         borderBottomWidth: 2,
