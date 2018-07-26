@@ -101,8 +101,8 @@ export class SetReminderScreen extends Component {
             width
         }
         return (
-            <View >
-                <Text>Add Reminder</Text>
+            <View style={styles.overall}>
+                <Text style={styles.headline}> Add Reminder</Text>
                 <View style={styles.container}>
                     <TouchableWithoutFeedback
                         onPress={this.openDatePicker}
@@ -128,7 +128,6 @@ export class SetReminderScreen extends Component {
                     >
                         <View>
                             <TextInput
-                               
                                 style={styles.input}
                                 value={this.state.timeText}
                                 placeholder='Event Time'
@@ -157,32 +156,38 @@ export class SetReminderScreen extends Component {
     }
 }
 const styles = StyleSheet.create({
-    container: {
-        marginLeft:20,
-        marginRight:20,
+    overall:{
+        flex:1,
         justifyContent: 'center',
         alignItems: 'center',
-       
+        flexDirection:'column',
     },
-    buttonContainer: {
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'space-around'
+    headline:{
+        fontWeight:'bold',
+        fontSize:40,
+    },
+    container: {
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     input: {
         textAlign: 'center',
-        fontSize: 30,
-        width: "75%",
+        fontSize: 20,
+        width: 300,
         height: 100,
         color: 'black',
         borderBottomWidth: 2,
-        borderBottomColor: 'red',
-
+        borderBottomColor: 'green'
+    },
+    buttonContainer: {
+        margin:40,
+        flexDirection: 'row',
+        justifyContent: 'space-around',
     },
     button: {
-
         width: '40%',
-        height: 40
+        height: 40,
+        margin: 5
     }
 });
 AppRegistry.registerComponent('AndroidAssignment', () => SetReminderScreen);
