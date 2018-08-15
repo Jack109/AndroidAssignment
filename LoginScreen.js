@@ -12,10 +12,10 @@ export class LoginScreen extends Component {
                 <View style={styles.formContainer}>
                     <TextInput style={styles.input}
                         autoCapitalize="none"
-                        onSubmitEditing={() => this.passwordInput.focus()}
                         autoCorrect={false}
                         keyboardType='email-address'
                         returnKeyType="next"
+                        onSubmitEditing={() => this.passwordInput.focus()}
                         placeholder='Email'
                         placeholderTextColor='grey' />
 
@@ -24,7 +24,7 @@ export class LoginScreen extends Component {
                         ref={(input) => this.passwordInput = input}
                         placeholder='Password'
                         placeholderTextColor='grey'
-                        secureTextEntry />
+                        secureTextEntry={true} />
                     <TouchableOpacity style={styles.buttonContainer}
                         onPress={this.props.onPressonButtonPress}>
                         <Text style={styles.buttonText}>LOGIN</Text>

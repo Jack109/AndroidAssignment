@@ -1,36 +1,36 @@
 //http://stacktips.com/tutorials/react-native/creating-login-screen-in-react-native
 import React, { Component } from 'react';
-import { View, Text, Image, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, KeyboardAvoidingView,Image, TextInput, TouchableOpacity, StyleSheet, } from 'react-native';
 
 export class RegisterScreen extends Component {
     render() {
         return (
-            <View style={styles.container}>
+            <KeyboardAvoidingView behavior="padding" style={styles.container}>
                 <View style={styles.loginContainer}>
                     <Image resizeMode="contain" style={styles.logo} source={require('./logo.png')} />
                 </View>
                 <View style={styles.formContainer}>
                     <TextInput style={styles.input}
-                        autoCapitalize="none"
-                        onSubmitEditing={() => this.passwordInput.focus()}
+                        autoCapitalize="none" 
                         autoCorrect={false}
                         keyboardType='email-address'
                         returnKeyType="next"
+                        onSubmitEditing={() => this.passwordInput.focus()}
                         placeholder='Email'
                         placeholderTextColor='grey' />
-
                     <TextInput style={styles.input}
-                        returnKeyType="go"
+                        returnKeyType="next"
+                        onSubmitEditing={() => this.confirmPasswordInput.focus()}
                         ref={(input) => this.passwordInput = input}
                         placeholder='Password'
                         placeholderTextColor='grey'
-                        secureTextEntry />
+                        secureTextEntry={true}/>
                     <TextInput style={styles.input}
                         returnKeyType="go"
-                        ref={(input) => this.passwordInput = input}
+                        ref={(input) => this.confirmPasswordInput = input}
                         placeholder='Confirm Password'
                         placeholderTextColor='grey'
-                        secureTextEntry />
+                        secureTextEntry={true}/>
                
 
                     <TouchableOpacity style={styles.buttonContainer}
@@ -38,7 +38,7 @@ export class RegisterScreen extends Component {
                         <Text style={styles.buttonText}>Register</Text>
                     </TouchableOpacity>
                 </View>
-            </View>
+            </KeyboardAvoidingView>
         );
     }
 }
