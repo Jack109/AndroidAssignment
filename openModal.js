@@ -12,7 +12,7 @@ import {
   Text, TouchableOpacity,
   View
 } from 'react-native';
-import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native-simple-radio-button';
+
 import { FloatingAction } from 'react-native-floating-action';
 import Modal from "react-native-modal";
 
@@ -30,11 +30,6 @@ const actions = [{
   position: 1
 }];
 
-var radio_props = [
-  { label: 'ON Going', value: 0 },
-  { label: 'COMPLETE', value: 1 },
-  { label: '  all   ', value: 2 },
-];
 export default class App extends Component {
   constructor(props) {
     super(props);
@@ -47,8 +42,8 @@ export default class App extends Component {
   render() {
     return (
       <View style={styles.container}>
-       <Text>HI</Text>
-       
+        <Text>HI</Text>
+
         <FloatingAction
           actions={actions}
           color={'#a80000'}
@@ -72,37 +67,37 @@ export default class App extends Component {
         />
 
         {!this.state.visibleModal ? null :
-        <Modal
-        isVisible={this.state.visibleModal === 1}
-        onBackdropPress={() => this.setState({ visibleModal: null })}
-        animationIn={'zoomInDown'}
-        animationOut={'zoomOutUp'}
-        animationInTiming={1000}
-        animationOutTiming={1000}
-        backdropTransitionInTiming={1000}
-        backdropTransitionOutTiming={1000}
-      >
-        <View style={styles.modalContent}>
-          <RadioForm
-          style={{ alignItems: 'flex-start' }}
-            radio_props={radio_props}
-            initial={0}
-            formHorizontal={false}
-            labelHorizontal={true}
-            buttonColor={'#2196f3'}
-            animation={true}
-            onPress={(value) => { this.setState({ value: value }) }}
-          />
-          <TouchableOpacity onPress={() => this.setState({ visibleModal: null })}>
-            <View style={styles.button}>
-              <Text style={styles.buttonText} >Close</Text>
+          <Modal
+            isVisible={this.state.visibleModal === 1}
+            onBackdropPress={() => this.setState({ visibleModal: null })}
+            animationIn={'zoomInDown'}
+            animationOut={'zoomOutUp'}
+            animationInTiming={1000}
+            animationOutTiming={1000}
+            backdropTransitionInTiming={1000}
+            backdropTransitionOutTiming={1000}
+          >
+            <View style={styles.modalContent}>
+              <View style={styles.buttonRow}>
+                <TouchableOpacity
+                  style={styles.button}
+                >
+                  <Text style={styles.text}> Show On-Going Task</Text>
+                </TouchableOpacity>
+              <TouchableOpacity
+                  style={styles.button}
+                >
+                  <Text style={styles.text}> Show Completed Task </Text>
+                </TouchableOpacity>
+              <TouchableOpacity
+                  style={styles.button}
+                >
+                  <Text style={styles.text}> Show All Task</Text>
+                </TouchableOpacity>
+              </View>
             </View>
-          </TouchableOpacity>
-        </View>
-
-      </Modal>
+          </Modal>
         }
-        
       </View>
     );
   }
@@ -114,34 +109,34 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  welcome: {
+  text: {
     fontSize: 20,
     textAlign: 'center',
     margin: 10,
   },
   button: {
+    flex:1,
     backgroundColor: 'lightblue',
-    padding: 12,
-    margin: 16,
+    padding: 10,
+    margin:5,
+    width:300,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 4,
-    borderColor: 'rgba(0, 0, 0, 0.1)',
+    borderColor: 'grey',
   },
-  buttonText:{
-    
+  buttonRow: {
+    margin: 40,
+    flexDirection: 'column',
+    justifyContent: 'space-around',
   },
   modalContent: {
     backgroundColor: 'white',
     padding: 22,
     justifyContent: 'center',
+    height:400,
     alignItems: 'center',
     borderRadius: 4,
-    borderColor: 'rgba(0, 0, 0, 0.1)',
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+    borderColor: 'grey',
   },
 });
